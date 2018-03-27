@@ -1,0 +1,27 @@
+
+// a.
+match ({nom:'x80'})-->(arrive) return *
+
+// b. 
+match({nom:'x79'})-[lien:TA]->(arrive) return *
+
+// c.
+match({nom:'x79'})-[lien:B]->(arrive) return *
+
+// d.
+match (depart {nom:'x1'}),(arrive {nom:'x100'}), p = shortestPath((depart)-[*]->(arrive)) return p
+
+// e. TODO
+match (depart {nom:'x7'}), (arrive {nom:'x100'}), p=allShortestPaths((depart)-[:B|:TA*]->(arrive)) return p
+
+// f. 
+match (depart {nom:'x7'}), (arrive {nom:'x100'}), p=allShortestPaths((depart)-[:B|:TA*]->(arrive)) return count(p)
+
+// g. 
+match (depart {nom:'x1'}),(arrive {nom:'x100'}), p = shortestPath((depart)-[*]->(arrive)) return length(p)
+
+// h. 
+match (arrive {nom:'x51'}), p = (depart)-[:TA]->()-[:M]->()-[:B]->()-[:TA]->(arrive) return depart
+
+// i. 
+match (depart {nom:'x24'})-[*2]->(arrive) where depart <> arrive return arrive

@@ -1,0 +1,57 @@
+// a) 
+db.dblp.find(
+    { 'year' : { $gt : 2000 } }
+)
+
+// b) 
+db.dblp.find(
+    { 'year' : { $gt : 2013 } }, 
+    { year : 1, pages : 1 }
+)
+
+// c) 
+db.dblp.distinct("publisher")
+
+// d) 
+db.dblp.find(
+    { 'authors' : "Ingrid Zukerman" }
+).sort(
+    { "year" : 1 }
+)
+
+// e) 
+db.dblp.find(
+    { 'authors' : "Ingrid Zukerman" }
+).count()
+
+// f) 
+db.dblp.find(
+    { 'authors' : [ "Fabian Bohnert", "Ingrid Zukerman" ] }
+)
+
+// g)
+db.bdlp.insert(
+    {
+        "_id" : "conf/um/BousqZ00a",
+        "pages" : {
+            "start" : 1,
+            "end" : 2
+        },
+        "year" : 2020,
+        "type" : "Bande-Dessinee",
+        "title" : "Tintin et le cours de BD",
+        "booktitle" : "CAFE",
+        "url" : "db/conf/um/cafe2020.html#BousqZ00a",
+        "authors" : [
+            "Bruno Bousquet",
+        ]
+    }
+)
+
+// h)
+db.bdlp.updateOne(
+    { "_id": "conf/um/BousqZ00a" },
+    {
+        $set: { "authors": ["Bruno Bousquet", "Francis Labbe"] }
+    }
+)
