@@ -2,6 +2,7 @@ package Main;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -17,24 +18,34 @@ public class Main {
 					"jdbc:postgresql://127.0.0.1:5432/tp5", 
 					"brunobousquet", 
 					"");
-			Statement stmt = connexion.createStatement();
-			ResultSet results = stmt.executeQuery("select * from chercheur, article where matricule = auteur and matricule in (select auteur from article)");
-			ResultSetMetaData metadata=  results.getMetaData();
-			System.out.println(metadata.getColumnCount());
-			while (results.next()) {
-					System.out.print(results.getString("matricule")+", ");
-					System.out.print(results.getString("prenom")+", ");
-					System.out.print(results.getString("nom")+", ");
-					System.out.print(results.getString("position")+", ");
-					System.out.print(results.getString("equipe")+", ");
-					System.out.println(results.getInt("salaire")+", ");
 
-					System.out.print("  "+results.getString("auteur")+", ");
-					System.out.print("  "+results.getString("coauteur")+", ");
-					System.out.print("  "+results.getDate("soumisLe")+", ");
-					System.out.println("  "+results.getString("departement"));
-			}
+			PreparedStatement stmt6DelCstr = connexion.prepareStatement(
+					"ALTER TABLE article "
+					+ "DROP CONSTRAINT ART_AUTEUR1_FK");
 			
+			PreparedStatement stmt6AddCstr = connexion.prepareStatement(
+					"ALTER TABLE article "
+					+ "ADD CONSTRAINT ART_AUTEUR1_FK "
+					+ "FOREIGN KEY (auteur) REFERENCES chercheur(matricule) ON DELETE CASCADE ");
+			PreparedStatement stmt6Delete = connexion.prepareStatement(
+					"DELETE FROM chercheur "
+					+ "WHERE matricule in ( "
+					+ "SELECT auteur "
+					+ "FROM article "
+					+ "WHERE soumisLe = '2007-05-16 00:00:00') ");
+
+			PreparedStatement stmt9AddMedecine = connexion.prepareStatement(
+					"INSERT INTO Departement "
+					+ "(nom, dateCreation, adresse) "
+					+ "VALUES ('Medecine', TO_DATE('01-03-2018','DD:MM:YYYY'), 'Gaspesie')");
+			
+			PreparedStatement stmt10AddPediatre = connexion.prepareStatement(
+					"INSERT INTO Equipe "
+					+ "(nom, departement) "
+					+ "VALUES ('Pediatre', 'Medecine')");
+			
+			stmt10AddPediatre.execute();
+					
 			connexion.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

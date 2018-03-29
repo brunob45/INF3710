@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Model.Departement" table="departement">
+		<id name="nom" column="nom" type="string" />
+		<property name="dateCreation" column="dateCreation" type="string" />
+		<property name="adresse" column="adresse" type="string" />
+		<property name="telephone" column="telephone" type="string" />
+
+		<!--<many-to-one name="d" class="Model.Client" fetch="join">
+			<column name="cid" />
+		</many-to-one>-->
+
+	</class>
+</hibernate-mapping>
