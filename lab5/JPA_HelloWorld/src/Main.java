@@ -96,6 +96,56 @@ public class Main {
 			dManager.close();
 			break;
 		}
+		case 8: {
+			PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
+			// Connecte a la table Postgres
+			dManager.setUp();
+
+			dManager.close();
+			break;
+		}
+
+		case 9: {
+			PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
+			// Connecte a la table Postgres
+			dManager.setUp();
+
+			EntityManager em = getEntityManager();
+			em.getTransaction.begin();
+
+			Departement departement = new Departement();
+			departement.setNom("Medecine");
+			departement.setDateCreation("2018-03-01 00:00:00.0");
+			departement.setAdresse("Gaspesie");
+
+			em.persist(departement);
+			em.getTransaction().commit();
+
+			dManager.close();
+			break;
+		}
+
+		case 10: {
+			PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
+			// Connecte a la table Postgres
+			dManager.setUp();
+
+			EntityManager em = getEntityManager();
+			em.getTransaction.begin();
+
+			Departement departement = new Departement();
+
+			Equipe equipe = new Equipe();
+			equipe.setNom("Pediatre");
+			equipe.setDepartement(departement);
+
+			em.persist(equipe);
+			em.getTransaction().commit();
+			dManager.close();
+			break;
+		}
+
+
 		}
 	}
 }
