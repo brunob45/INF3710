@@ -20,6 +20,7 @@ public class PGeneric<T> {
 	
 	private static EntityManagerFactory managerFactory = null;
 	private static EntityManager manager = null;
+	private static int instances = 0;
 
 	public void setUp () {
 		if (managerFactory == null) {
@@ -29,10 +30,14 @@ public class PGeneric<T> {
 		if (manager == null) {
 			manager = managerFactory.createEntityManager();
 		}
+		instances++;
 	}
 
 	public T read (String nom) {
 		return manager.find(klass, nom);
+	}
+	public T getReference (String nom) {
+		return manager.getReference(klass, nom);
 	}
 	
 	public List<T> get(String table) {
@@ -46,6 +51,12 @@ public class PGeneric<T> {
 		commitTransaction();
 	}
 	
+	public void add(T item) {
+		beginTransaction();
+		manager.persist(item);
+		commitTransaction();
+	}
+	
 	public void beginTransaction() {
 		manager.getTransaction().begin();
 	}
@@ -55,8 +66,11 @@ public class PGeneric<T> {
 	}
 	
 	public void close() {
-		manager.close();
-		managerFactory.close();
+		instances--;
+		if(instances <= 0) {
+			manager.close();
+			managerFactory.close();
+		}
 	}
 
 }

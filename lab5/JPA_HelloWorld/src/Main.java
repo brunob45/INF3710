@@ -12,7 +12,7 @@ import Persistence.PGeneric;
 public class Main {
 
 	public static void main(String[] args) {
-		final int numero = 7;
+		final int numero = 8;
 		switch(numero) {
 		case 1: {
 			PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
@@ -92,16 +92,24 @@ public class Main {
 			departement.setAdresse("Quebec");
 			// J'annonce que les modifications doivent être enregistrées
 			dManager.commitTransaction();
-			// Je ferme la connection /!\ IMPORTANT /!\ Sinon memory leak -> PC plante
+			// Je ferme la connection /!\ IMPORTANT /!\ Sinon memory leak
 			dManager.close();
 			break;
 		}
 		case 8: {
-			PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
+			PGeneric<Chercheur> cManager = new PGeneric<Chercheur>(Chercheur.class);
 			// Connecte a la table Postgres
-			dManager.setUp();
-
-			dManager.close();
+			cManager.setUp();
+			cManager.beginTransaction();
+			List<Chercheur> chercheurs = cManager.get("Chercheur");
+			for(Chercheur chercheur : chercheurs) {
+				if(chercheur.getPosition().equalsIgnoreCase("postdoc") 
+					&& chercheur.getEquipe().getDepartement().getNom().equalsIgnoreCase("Physique")) { // Il y a personne en Maths au postdoc :
+					chercheur.setPosition("maitrise");
+				}
+			}
+			cManager.commitTransaction();
+			cManager.close();
 			break;
 		}
 
@@ -110,37 +118,32 @@ public class Main {
 			// Connecte a la table Postgres
 			dManager.setUp();
 
-			EntityManager em = getEntityManager();
-			em.getTransaction.begin();
-
 			Departement departement = new Departement();
 			departement.setNom("Medecine");
-			departement.setDateCreation("2018-03-01 00:00:00.0");
+			departement.setDateCreation(LocalDate.of(2018, 03, 01));
 			departement.setAdresse("Gaspesie");
 
-			em.persist(departement);
-			em.getTransaction().commit();
+			dManager.add(departement);
 
 			dManager.close();
 			break;
 		}
 
 		case 10: {
+			PGeneric<Equipe> eManager = new PGeneric<Equipe>(Equipe.class);
 			PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
-			// Connecte a la table Postgres
+			eManager.setUp();
 			dManager.setUp();
-
-			EntityManager em = getEntityManager();
-			em.getTransaction.begin();
-
-			Departement departement = new Departement();
-
+			
 			Equipe equipe = new Equipe();
 			equipe.setNom("Pediatre");
-			equipe.setDepartement(departement);
+			
+			Departement medecine = dManager.read("Medecine");
+			equipe.setDepartement(medecine);
 
-			em.persist(equipe);
-			em.getTransaction().commit();
+			eManager.add(equipe);
+			
+			eManager.close();
 			dManager.close();
 			break;
 		}

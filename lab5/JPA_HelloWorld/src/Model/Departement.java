@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ public class Departement {
 	private String nom;
 
 	@Column(name ="dateCreation")
-	private Date dateCreation;
+	private LocalDate dateCreation;
 	@Column(name="adresse")
 	private String adresse;
 	@Column(name="telephone")
@@ -52,11 +53,11 @@ public class Departement {
 		this.nom = nom;
 	}
 
-	public Date getDateCreation() {
+	public LocalDate getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(Date dateCreation) {
+	public void setDateCreation(LocalDate dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 
