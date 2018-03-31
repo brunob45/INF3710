@@ -2,6 +2,7 @@
 
 //import Model.Article;
 //import Model.Chercheur;
+import Model.Article;
 import Model.Departement;
 //import Model.Equipe;
 import Persistence.AbstractPersistence;
@@ -11,14 +12,14 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		AbstractPersistence<Departement> o = 
-				new AbstractPersistence<Departement>(Departement.class);
+		AbstractPersistence<Article> o = 
+				new AbstractPersistence<Article>(Article.class);
 		o.setUp();
 		o.ouvrirSession();// U1
-		Departement d = o.read("Medecine");
-		System.out.println(d.getNom());
-		d.setTelephone("123-456-7890");
-		o.update(d);
+		Article d = o.read("Informatique");
+		System.out.println(d.getAuteur());
+//		d.setTelephone("123-456-7890");
+//		o.update(d);
 
 		/*for (Commande cm : c.getCommandes()) {
 			System.out.println(cm.getQty());

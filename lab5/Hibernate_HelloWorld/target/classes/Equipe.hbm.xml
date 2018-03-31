@@ -14,7 +14,7 @@
 		</many-to-one>
 
 		<set name="chercheurs" fetch="join">
-			<key column=" nom " />
+			<key column="nom" />
 			<one-to-many class="Model.Chercheur" />
 		</set>
 

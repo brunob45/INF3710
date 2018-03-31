@@ -15,7 +15,7 @@
 		</many-to-one>
 
 		<set name="articles" fetch="join">
-			<key column=" matricule " />
+			<key column="matricule" />
 			<one-to-many class="Model.Article" />
 		</set>
 

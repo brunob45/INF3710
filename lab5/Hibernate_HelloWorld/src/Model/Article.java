@@ -9,7 +9,7 @@ public class Article implements Serializable {
 
 	private Chercheur auteur;
 
-	@Column(insertable=false, updatable=false)
+//	@Column(insertable=false, updatable=false)
 	private Chercheur coauteur;
 	
 	private Date soumisLe;
