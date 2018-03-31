@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC  
+	"-//Hibernate/Hibernate Mapping DTD//EN"  
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0">
 <hibernate-mapping>
 	<class name="Model.Departement" table="Departement">
 		<id name="nom" column="nom" type="string" />
-		<property name="date" column="date" type="string" />
+		<property name="dateCreation" column="dateCreation" type="date" />
 		<property name="adresse" column="adresse" type="string" />
 		<property name="telephone" column="telephone" type="string" />
 		
-		<set name="equipe" fetch="join">
+		<set name="equipes" fetch="join">
 			<key column=" nom " />
 			<one-to-many class="Model.Departement" />
 		</set>
 		<set name="articles" fetch="join">
-			<key column=" cid " column=" soumisLe " column=" departement " />
-			<one-to-many class="Model.Commande" />
+			<key column=" soumisLe "/>
+			<one-to-many class="Model.Article" />
 		</set>
 
 	</class>

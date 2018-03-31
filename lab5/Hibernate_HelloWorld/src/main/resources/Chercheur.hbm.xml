@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC  
+	"-//Hibernate/Hibernate Mapping DTD//EN"  
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0">
 <hibernate-mapping>
 	<class name="Model.Chercheur" table="Chercheur">
 		<id name="matricule" column="matricule" type="string" />
 		<property name="prenom" column="prenom" type="string" />
 		<property name="nom" column="nom" type="string" />
 		<property name="position" column="position" type="string" />
-		<property name="equipe" column="equipe" type="string" />
 		<property name="salaire" column="salaire" type="integer" />
 		
-		<many-to-one name="equipe" class="Model.Equipe" fetch="join">
+		<many-to-one name="equipe" class="Model.Equipe" fetch="join" insert="false" update="false">
 			<column name="nom" />
 		</many-to-one>
 

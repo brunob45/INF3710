@@ -1,8 +1,8 @@
 package Persistence;
 
+import java.beans.Customizer;
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,16 +10,11 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import Model.Departement;
 
-public class AbstractPersistence<TYPE> {
-	private Class<TYPE> clazz;
-	
+public class PDepartement {
 	private SessionFactory sessionFactory = null;
 	private Session currentSession = null;
-	
-	public AbstractPersistence(Class<TYPE> c) {
-		this.clazz = c;
-	}
 
 	public void setUp () {
 		StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -29,10 +24,6 @@ public class AbstractPersistence<TYPE> {
 			sessionFactory = new MetadataSources(registry)
 					.buildMetadata()
 					.buildSessionFactory();
-		} catch(HibernateException exception){
-		     System.out.println("\nProblem creating session factory");
-		     exception.printStackTrace();
-			 StandardServiceRegistryBuilder.destroy(registry); 
 		} catch (Exception ex) { 
 			StandardServiceRegistryBuilder.destroy(registry); 
 		}
@@ -48,15 +39,15 @@ public class AbstractPersistence<TYPE> {
 
 	}
 
-	public TYPE read(Object id) {
-		return currentSession.find(clazz, id);
+	public Departement read(String id) {
+		return currentSession.find(Departement.class, id);
 	}
 
-	public List<TYPE> read() {
-		return currentSession.createQuery("from " + clazz.getName()).getResultList();
+	public List<Departement> read() {
+		return currentSession.createQuery("from " + Departement.class.getName()).getResultList();
 	}
 
-	public void update (TYPE c) {
+	public void update (Departement c) {
 		Transaction tx = currentSession.getTransaction();
 		try {
 			tx.begin();
@@ -75,6 +66,5 @@ public class AbstractPersistence<TYPE> {
 	public void close() {
 		sessionFactory.close();
 	}
-
 
 }

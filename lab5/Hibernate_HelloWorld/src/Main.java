@@ -1,24 +1,26 @@
-import java.util.List;
+//import java.util.List;
 
-import Model.Client;
-import Model.Commande;
+//import Model.Article;
+//import Model.Chercheur;
+import Model.Departement;
+//import Model.Equipe;
 import Persistence.AbstractPersistence;
-import Persistence.PClient;
+//import Persistence.PDepartement;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		AbstractPersistence<Client> o = 
-				new AbstractPersistence<Client>(Client.class);
+		AbstractPersistence<Departement> o = 
+				new AbstractPersistence<Departement>(Departement.class);
 		o.setUp();
 		o.ouvrirSession();// U1
-		Client c = o.read("c001");
-		System.out.println(c.getNom());
-		c.setDiscnt(12);
-		o.update(c);
+		Departement d = o.read("Medecine");
+		System.out.println(d.getNom());
+		d.setTelephone("123-456-7890");
+		o.update(d);
 
-		for (Commande cm : c.getCommandes()) {
+		/*for (Commande cm : c.getCommandes()) {
 			System.out.println(cm.getQty());
 		}
 
@@ -33,7 +35,7 @@ public class Main {
 		List<Client> cls = o.read();
 		for (Client client : cls) {
 			System.out.println(client.getNom());
-		}
+		}*/
 
 
 		o.fermerSession();
