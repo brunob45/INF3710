@@ -16,8 +16,10 @@
 			<column name="nom" />
 		</many-to-one-->
 
-		<set name="articles" fetch="join">
-			<key column="auteur" />
+		<set name="articles" fetch="join" cascade="delete" lazy="false" inverse="true" >
+			<key>
+				<column name ="auteur" not-null="true" />
+			</key>
 			<one-to-many class="Model.Article" />
 		</set>
 

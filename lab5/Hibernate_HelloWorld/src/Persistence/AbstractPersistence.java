@@ -14,8 +14,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class AbstractPersistence<TYPE> {
 	private Class<TYPE> clazz;
 	
-	private SessionFactory sessionFactory = null;
-	private Session currentSession = null;
+	private static SessionFactory sessionFactory = null;
+	private static Session currentSession = null;
+	private static Integer instances = 0;
 	
 	public AbstractPersistence(Class<TYPE> c) {
 		this.clazz = c;
@@ -29,6 +30,7 @@ public class AbstractPersistence<TYPE> {
 			sessionFactory = new MetadataSources(registry)
 					.buildMetadata()
 					.buildSessionFactory();
+			instances++;
 		} catch(HibernateException exception){
 		     System.out.println("\nProblem creating session factory");
 		     exception.printStackTrace();
@@ -66,6 +68,29 @@ public class AbstractPersistence<TYPE> {
 			tx.rollback();
 		}
 	}
+	
+	public void remove (TYPE item) {
+		Transaction tx = currentSession.getTransaction();
+		try {
+			tx.begin();
+			currentSession.remove(item);
+			tx.commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			tx.rollback();
+		}
+	}
+	
+	public void add (TYPE item) {
+		Transaction tx = currentSession.getTransaction();
+		try {
+			tx.begin();
+			currentSession.persist(item);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		}
+	}
 
 	public void fermerSession() {
 		/* Instructions … */
@@ -73,7 +98,10 @@ public class AbstractPersistence<TYPE> {
 
 	}
 	public void close() {
-		sessionFactory.close();
+		instances--;
+		if(instances < 0) {
+			sessionFactory.close();
+		}
 	}
 
 

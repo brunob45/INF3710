@@ -6,7 +6,7 @@
 <hibernate-mapping>
 	<class name="Model.Article" table="Article">
 		<composite-id>
-			<key-many-to-one name="auteur" class="Model.Chercheur" column ="auteur" />
+			<key-many-to-one name="auteur" class="Model.Chercheur" column ="auteur"/>
 			<key-property name="soumisLe" column="soumisLe" type="date" />
 			<key-many-to-one name="departement" class="Model.Departement" column ="departement" />
 		</composite-id>

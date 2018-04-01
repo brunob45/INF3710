@@ -14,7 +14,9 @@
 			<one-to-many class="Model.Equipe" />
 		</set>
 		<set name="articles" fetch="join">
-			<key column="departement"/>
+			<key>
+				<column name ="departement" not-null="true" />
+			</key>
 			<one-to-many class="Model.Article" />
 		</set>
 
