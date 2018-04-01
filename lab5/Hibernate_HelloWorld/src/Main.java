@@ -89,39 +89,45 @@ public class Main {
 			cManager.fermerSession();
 			cManager.close();
 		}
-		/*case 5:
-			PGeneric<Article> aManager = new PGeneric<Article>(Article.class);
-			aManager.setUp();
-			List<Article> articles = aManager.get("Article");
+		case 5:
+			AbstractPersistence<Mathematique> mManager =
+					new AbstractPersistence<Mathematique>(Mathematique.class);
+			mManager.setUp();
+			mManager.ouvrirSession();
+			List<Article> articles = mManager.get("Article");
 			for(Article article : articles) {
 				if(article.getDepartement().getNom().equals("Mathematiques")) {
 					System.out.println("Removing " + article);
-					aManager.remove(article);
+					mManager.remove(article);
 				}
 			}
-			aManager.close();
+			mManager.fermerSession();
+			mManager.close();
 			break;
 		case 6:{
-			PGeneric<Chercheur> cManager = new PGeneric<Chercheur>(Chercheur.class);
-			cManager.setUp();
-			List<Chercheur> chercheurs = cManager.get("Chercheur");
+			AbstractPersistence<Article> aManager =
+					new AbstractPersistence<Article>(Article.class);
+			aManager.setUp();
+			aManager.ouvrirSession();
+			List<Chercheur> chercheurs = aManager.get("Chercheur");
 			for(Chercheur chercheur : chercheurs) {
 				for(Article article : chercheur.getArticles()) {
 					if(article.getSoumisLe().equals(LocalDate.of(2007,05,16))) {
 						System.out.println("Removing " + chercheur);
-						cManager.remove(chercheur);
+						aManager.remove(chercheur);
 						break;
 					}
 				}
 			}
-			cManager.close();
+			aManager.fermerSession();
+			aManager.close();
 			break;
 		}
 		case 7: {
-			// Crée le gestionnaire de table
-			PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
-			// Connecte a la table Postgres
+			AbstractPersistence<Departement> dManager =
+					new AbstractPersistence<Departement>(Departement.class);
 			dManager.setUp();
+			dManager.ouvrirSession();
 			// SELECT * FROM Departement WHERE nom == "Physique"
 			Departement departement = dManager.read("Physique");
 			
@@ -132,13 +138,15 @@ public class Main {
 			// J'annonce que les modifications doivent être enregistrées
 			dManager.commitTransaction();
 			// Je ferme la connection /!\ IMPORTANT /!\ Sinon memory leak
+			dManager.fermerSession();
 			dManager.close();
 			break;
 		}
 		case 8: {
-			PGeneric<Chercheur> cManager = new PGeneric<Chercheur>(Chercheur.class);
-			// Connecte a la table Postgres
+			AbstractPersistence<Chercheur> cManager =
+					new AbstractPersistence<Chercheur>(Chercheur.class);
 			cManager.setUp();
+			cManager.ouvrirSession();
 			cManager.beginTransaction();
 			List<Chercheur> chercheurs = cManager.get("Chercheur");
 			for(Chercheur chercheur : chercheurs) {
@@ -148,31 +156,39 @@ public class Main {
 				}
 			}
 			cManager.commitTransaction();
+			cManager.fermerSession();
 			cManager.close();
 			break;
 		}
 
 		case 9: {
-			PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
-			// Connecte a la table Postgres
-			dManager.setUp();
+			AbstractPersistence<Chercheur> cManager =
+					new AbstractPersistence<Chercheur>(Chercheur.class);
+			cManager.setUp();
+			cManager.ouvrirSession();
 
 			Departement departement = new Departement();
 			departement.setNom("Medecine");
 			departement.setDateCreation(LocalDate.of(2018, 03, 01));
 			departement.setAdresse("Gaspesie");
 
-			dManager.add(departement);
-
-			dManager.close();
+			CManager.add(departement);
+			cManager.fermerSession();
+			cManager.close();
 			break;
 		}
 
 		case 10: {
-			PGeneric<Equipe> eManager = new PGeneric<Equipe>(Equipe.class);
-			PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
+			//PGeneric<Equipe> eManager = new PGeneric<Equipe>(Equipe.class);
+			AbstractPersistence<Equipe> eManager =
+					new AbstractPersistence<Equipe>(Equipe.class);
+			//PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
+			AbstractPersistence<Departement> cManager =
+					new AbstractPersistence<Departement>(Departement.class);
 			eManager.setUp();
+			eManager.ouvrirSession();
 			dManager.setUp();
+			dManager.ouvrirSession();
 			
 			Equipe equipe = new Equipe();
 			equipe.setNom("Pediatre");
@@ -181,11 +197,13 @@ public class Main {
 			equipe.setDepartement(medecine);
 
 			eManager.add(equipe);
-			
+
+			eManager.fermerSession();
 			eManager.close();
+			dManager.fermerSession();
 			dManager.close();
 			break;
-		}*/
+		}
 
 
 		}
