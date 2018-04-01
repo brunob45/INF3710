@@ -8,11 +8,11 @@ import Model.Departement;
 import Model.Equipe;
 import Persistence.AbstractPersistence;
 
-
 public class Main {
 	public static void main(String[] args) {
-		System.out.println(1); 
-		{
+		final int numero = 10;
+		switch(numero) {
+		case 1: {
 			AbstractPersistence<Departement> pManager = 
 					new AbstractPersistence<Departement>(Departement.class);
 			pManager.setUp();
@@ -21,9 +21,10 @@ public class Main {
 			System.out.println(d);
 			pManager.fermerSession();
 			pManager.close();
+			break;
 		} 
-		System.out.println(2);
-		{
+		case 2:
+		case 3: {
 			AbstractPersistence<Chercheur> cManager = 
 					new AbstractPersistence<Chercheur>(Chercheur.class);
 			cManager.setUp();
@@ -32,31 +33,18 @@ public class Main {
 			for (Chercheur chercheur : chercheurs) {
 				if(!chercheur.getArticles().isEmpty()) {
 					System.out.println(chercheur);
-				}
-			}
-			cManager.fermerSession();
-			cManager.close();
-		}
-		System.out.println(3);
-		{
-			AbstractPersistence<Chercheur> cManager = 
-					new AbstractPersistence<Chercheur>(Chercheur.class);
-			cManager.setUp();
-			cManager.ouvrirSession();
-			List<Chercheur> chercheurs = cManager.read();
-			for (Chercheur chercheur : chercheurs) {
-				if(!chercheur.getArticles().isEmpty()) {
-					System.out.println(chercheur);
-					for(Article article : chercheur.getArticles()) {
-						System.out.println(article);
+					if(numero == 3) {
+						for(Article article : chercheur.getArticles()) {
+							System.out.println(article);
+						}
 					}
 				}
 			}
 			cManager.fermerSession();
 			cManager.close();
+			break;
 		}
-		System.out.println(4);
-		{
+		case 4: {
 			AbstractPersistence<Chercheur> cManager = 
 					new AbstractPersistence<Chercheur>(Chercheur.class);
 			cManager.setUp();
@@ -69,8 +57,7 @@ public class Main {
 			cManager.fermerSession();
 			cManager.close();
 		}
-		System.out.println(5);
-		{
+		case 5: {
 			AbstractPersistence<Article> aManager =
 					new AbstractPersistence<Article>(Article.class);
 			aManager.setUp();
@@ -84,9 +71,9 @@ public class Main {
 			}
 			aManager.fermerSession();
 			aManager.close();
+			break;
 		}
-		System.out.println(6);
-		{
+		case 6: {
 			AbstractPersistence<Chercheur> cManager =
 					new AbstractPersistence<Chercheur>(Chercheur.class);
 			AbstractPersistence<Article> aManager =
@@ -105,9 +92,9 @@ public class Main {
 			}
 			cManager.fermerSession();
 			cManager.close();
+			break;
 		}
-		System.out.println(7);
-		{
+		case 7: {
 			AbstractPersistence<Departement> dManager =
 					new AbstractPersistence<Departement>(Departement.class);
 			dManager.setUp();
@@ -119,9 +106,9 @@ public class Main {
 			
 			dManager.fermerSession();
 			dManager.close();
+			break;
 		}
-		System.out.println(8); 
-		{
+		case 8: {
 			AbstractPersistence<Chercheur> cManager =
 					new AbstractPersistence<Chercheur>(Chercheur.class);
 			cManager.setUp();
@@ -138,9 +125,10 @@ public class Main {
 			System.out.println("Done.");
 			cManager.fermerSession();
 			cManager.close();
+			break;
 		}
-		System.out.println(9);
-		{
+
+		case 9: {
 			AbstractPersistence<Departement> dManager =
 					new AbstractPersistence<Departement>(Departement.class);
 			dManager.setUp();
@@ -154,9 +142,10 @@ public class Main {
 			dManager.add(departement);
 			dManager.fermerSession();
 			dManager.close();
+			break;
 		}
-		System.out.println(10);
-		{
+
+		case 10: {
 			AbstractPersistence<Equipe> eManager =
 					new AbstractPersistence<Equipe>(Equipe.class);
 			AbstractPersistence<Departement> dManager =
@@ -173,6 +162,8 @@ public class Main {
 
 			dManager.fermerSession();
 			dManager.close();
+			break;
+		}
 		}
 	}
 }
