@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 public class Departement {
@@ -11,13 +12,6 @@ public class Departement {
 	
 	private Set<Equipe> equipes;
 	private Set<Article> articles;
-	
-	public Departement(String nom, Date dateCreation, String adresse, String telephone) {
-		this.setNom(nom);
-		this.setDateCreation(dateCreation);
-		this.setAdresse(adresse);
-		this.setTelephone(telephone);
-	}
 
 	public String getNom() {
 		return nom;
@@ -65,5 +59,10 @@ public class Departement {
 
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+	
+	@Override
+	public String toString() {
+		return this.nom + ", " + this.dateCreation.toString() + ", " + this.adresse + ", " + this.telephone;
 	}
 }

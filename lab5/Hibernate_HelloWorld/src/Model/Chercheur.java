@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.Set;
-
 import javax.persistence.Column;
 
 public class Chercheur {
@@ -13,19 +12,9 @@ public class Chercheur {
 	@Column(insertable=false, updatable=false)
 	private Equipe equipe;
 	
-	private int salaire;
+	private Integer salaire;
 	
 	private Set<Article> articles;
-	
-	public Chercheur(String matricule, String prenom, String nom,
-			String position, Equipe equipe, int salaire) {
-		this.setMatricule(matricule);
-		this.setPrenom(prenom);
-		this.setNom(nom);
-		this.setPosition(position);
-		this.setEquipe(equipe);
-		this.setSalaire(salaire);
-	}
 
 	public String getMatricule() {
 		return matricule;
@@ -67,11 +56,11 @@ public class Chercheur {
 		this.equipe = equipe;
 	}
 
-	public int getSalaire() {
+	public Integer getSalaire() {
 		return salaire;
 	}
 
-	public void setSalaire(int salaire) {
+	public void setSalaire(Integer salaire) {
 		this.salaire = salaire;
 	}
 
@@ -83,4 +72,8 @@ public class Chercheur {
 		this.articles = articles;
 	}
 	
+	@Override
+	public String toString() {
+		return this.matricule + ", " + this.prenom + ", " + this.nom + ", " + this.position + ", " + this.equipe.getNom() + ", " + this.salaire;
+	}
 }

@@ -10,12 +10,14 @@
 		<property name="position" column="position" type="string" />
 		<property name="salaire" column="salaire" type="integer" />
 		
-		<many-to-one name="equipe" class="Model.Equipe" fetch="join" insert="false" update="false">
+		
+		<many-to-one name="equipe" column="equipe" class="Model.Equipe" fetch="join"/>
+		<!--many-to-one name="equipe" class="Model.Equipe" fetch="join">
 			<column name="nom" />
-		</many-to-one>
+		</many-to-one-->
 
 		<set name="articles" fetch="join">
-			<key column="matricule" />
+			<key column="auteur" />
 			<one-to-many class="Model.Article" />
 		</set>
 

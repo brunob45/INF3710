@@ -2,27 +2,13 @@ package Model;
 
 import java.io.Serializable;
 import java.sql.Date;
-
-import javax.persistence.Column;
+import java.time.LocalDate;
 
 public class Article implements Serializable {
-
 	private Chercheur auteur;
-
-//	@Column(insertable=false, updatable=false)
 	private Chercheur coauteur;
-	
 	private Date soumisLe;
 	private Departement departement;
-	
-	public Article() {}
-	
-	public Article(Chercheur auteur, Chercheur coauteur, Date soumisLe, Departement departement) {
-		this.setAuteur(auteur);
-		this.setCoauteur(coauteur);
-		this.setSoumisLe(soumisLe);
-		this.setDepartement(departement);
-	}
 
 	public Chercheur getAuteur() {
 		return auteur;
@@ -56,6 +42,7 @@ public class Article implements Serializable {
 		this.departement = departement;
 	}
 	
+	@Override
 	public boolean equals(Object o) {
 		if(o.getClass() == this.getClass()) {
 			Article a = (Article)o;
@@ -64,8 +51,17 @@ public class Article implements Serializable {
 		return false;
 	}
 	
+	@Override
 	public int hashCode() {
 		return this.auteur.hashCode() ^ this.soumisLe.hashCode() ^ this.departement.hashCode();
 	}
 	
+	@Override
+	public String toString() {
+		if(this.coauteur == null) {
+			return this.auteur.getMatricule() + ", " + this.soumisLe.toString() + ", " + this.departement.getNom();
+		} else {
+			return this.auteur.getMatricule() + ", " + this.coauteur.getMatricule() + ", " + this.soumisLe.toString() + ", " + this.departement.getNom();
+		}
+	}
 }

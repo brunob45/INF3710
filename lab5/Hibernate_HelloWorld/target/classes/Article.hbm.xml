@@ -6,17 +6,11 @@
 <hibernate-mapping>
 	<class name="Model.Article" table="Article">
 		<composite-id>
-			<key-many-to-one name="auteur" class="Model.Chercheur" >
-				<column name="matricule" />
-			</key-many-to-one>
+			<key-many-to-one name="auteur" class="Model.Chercheur" column ="auteur" />
 			<key-property name="soumisLe" column="soumisLe" type="date" />
-			<key-many-to-one name="departement" class="Model.Departement">
-				<column name="nom" />
-			</key-many-to-one>
+			<key-many-to-one name="departement" class="Model.Departement" column ="departement" />
 		</composite-id>
 
-		<many-to-one name="coauteur" class="Model.Chercheur" insert="false" update="false" fetch="join">
-			<column name="matricule" />
-		</many-to-one>
+		<many-to-one name="coauteur" column="coauteur" class="Model.Chercheur" fetch="join"/>
 	</class>
 </hibernate-mapping>

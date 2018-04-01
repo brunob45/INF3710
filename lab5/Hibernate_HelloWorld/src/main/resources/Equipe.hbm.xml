@@ -9,12 +9,10 @@
 		<property name="responsable" column="responsable" type="string" />
 		<property name="nbrProjets" column="nbrProjets" type="integer" />
 		
-		<many-to-one name="departement" class="Model.Departement" fetch="join">
-			<column name="nom" />
-		</many-to-one>
+		<many-to-one name="departement" column="departement" class="Model.Departement" fetch="join"/>
 
 		<set name="chercheurs" fetch="join">
-			<key column="nom" />
+			<key column="equipe" />
 			<one-to-many class="Model.Chercheur" />
 		</set>
 

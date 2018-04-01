@@ -10,11 +10,11 @@
 		<property name="telephone" column="telephone" type="string" />
 		
 		<set name="equipes" fetch="join">
-			<key column="nom" />
+			<key column="departement" />
 			<one-to-many class="Model.Equipe" />
 		</set>
 		<set name="articles" fetch="join">
-			<key column="nom"/>
+			<key column="departement"/>
 			<one-to-many class="Model.Article" />
 		</set>
 

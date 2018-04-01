@@ -7,18 +7,10 @@ public class Equipe {
 	private String nom;
 	private Date dateCreation;
 	private String responsable;
-	private int nbrProjets;
+	private Integer nbrProjets;
 	private Departement departement;
 	
 	private Set<Chercheur> chercheurs;
-	
-	public Equipe(String nom, Date dateCreation, String responsable, int nbrProjets, Departement departement) {
-		this.setNom(nom);
-		this.setDateCreation(dateCreation);
-		this.setResponsable(responsable);
-		this.setNbrProjets(nbrProjets);
-		this.setDepartement(departement);
-	}
 
 	public String getNom() {
 		return nom;
@@ -44,11 +36,11 @@ public class Equipe {
 		this.responsable = responsable;
 	}
 
-	public int getNbrProjets() {
+	public Integer getNbrProjets() {
 		return nbrProjets;
 	}
 
-	public void setNbrProjets(int nbrProjets) {
+	public void setNbrProjets(Integer nbrProjets) {
 		this.nbrProjets = nbrProjets;
 	}
 
@@ -66,5 +58,10 @@ public class Equipe {
 
 	public void setChercheurs(Set<Chercheur> chercheurs) {
 		this.chercheurs = chercheurs;
+	}
+	
+	@Override
+	public String toString() {
+		return this.nom + ", " + this.dateCreation.toString() + ", " + this.responsable + ", " + this.nbrProjets + ", " + this.departement;
 	}
 }

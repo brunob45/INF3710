@@ -30,7 +30,7 @@ public class Main {
 			for (Chercheur chercheur : chercheurs) {
 				if(!chercheur.getArticles().isEmpty()) {
 					System.out.println(chercheur);
-					if(numero == 2) {
+					if(numero == 3) {
 						for(Article article : chercheur.getArticles()) {
 							System.out.println(article);
 						}
