@@ -172,7 +172,7 @@ public class Main {
 			departement.setDateCreation(LocalDate.of(2018, 03, 01));
 			departement.setAdresse("Gaspesie");
 
-			CManager.add(departement);
+			cManager.add(departement);
 			cManager.fermerSession();
 			cManager.close();
 			break;
@@ -183,7 +183,7 @@ public class Main {
 			AbstractPersistence<Equipe> eManager =
 					new AbstractPersistence<Equipe>(Equipe.class);
 			//PGeneric<Departement> dManager = new PGeneric<Departement>(Departement.class);
-			AbstractPersistence<Departement> cManager =
+			AbstractPersistence<Departement> dManager =
 					new AbstractPersistence<Departement>(Departement.class);
 			eManager.setUp();
 			eManager.ouvrirSession();

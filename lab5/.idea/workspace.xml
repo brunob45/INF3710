@@ -18,7 +18,7 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JPA_HelloWorld/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1770">
+            <state relative-caret-position="1309">
               <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
               <folding />
             </state>
@@ -28,8 +28,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Hibernate_HelloWorld/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="202" column="37" lean-forward="false" selection-start-line="202" selection-start-column="37" selection-end-line="202" selection-end-column="37" />
+            <state relative-caret-position="187">
+              <caret line="185" column="53" lean-forward="false" selection-start-line="185" selection-start-column="45" selection-end-line="185" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -407,12 +407,12 @@
       <option name="presentableId" value="Default" />
       <updated>1522521286936</updated>
       <workItem from="1522521289542" duration="421000" />
-      <workItem from="1522521789623" duration="6420000" />
+      <workItem from="1522521789623" duration="7917000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6841000" />
+    <option name="totallyTimeSpent" value="8338000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -574,7 +574,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/JPA_HelloWorld/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
+        <state relative-caret-position="1309">
           <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
           <folding />
         </state>
@@ -582,8 +582,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Hibernate_HelloWorld/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="202" column="37" lean-forward="false" selection-start-line="202" selection-start-column="37" selection-end-line="202" selection-end-column="37" />
+        <state relative-caret-position="187">
+          <caret line="185" column="53" lean-forward="false" selection-start-line="185" selection-start-column="45" selection-end-line="185" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
